@@ -24,7 +24,10 @@ function render(myLibrary) {
     return `<div>
               <p>
                ${book.title}
-              <button class="delete" data-index="${index}">
+              <button data-status="${status}" data-index="${index}">
+                ${ (book.status == 0) ? "Read" : "Unread" }
+              </button>
+              <button data-status="delete" data-index="${index}">
                 Delete
               </button>
               </p>
@@ -33,13 +36,24 @@ function render(myLibrary) {
   }).join('');
 }
 
-function deleteBookFromLibrary (e) {
-  console.log(e.target.dataset);
-  if (!e.target.matches('button')) return;
-  const {index} = e.target.dataset;
+function deleteBookFromLibrary (index) {
   myLibrary.splice(index, 1);
   render(myLibrary);
 }
 
+function editBookInLibrary(e) {
+  const {index, status} = e.target.dataset;
+  if (status == 'delete'){
+    deleteBookFromLibrary(index);
+    console.log(myLibrary);
+  }else{
+    changeStatus(index);
+  }
+}
+
+function changeStatus(index) {
+
+}
+
 addBooks.addEventListener('submit', addBookToLibrary);
-bookList.addEventListener('click', deleteBookFromLibrary);
+bookList.addEventListener('click', editBookInLibrary);
