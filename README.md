@@ -27,8 +27,6 @@ To get a local copy up and running follow these simple example steps.
 ### Setup
 - Clone the repository.
 
-
-
 ## Authors
 
 👤 **Christopher Amanor**
@@ -36,6 +34,12 @@ To get a local copy up and running follow these simple example steps.
 - Github: [@krys2fa](https://github.com/krys2fa)
 - Twitter: [@krys2fa](https://twitter.com/krys2fa)
 - Linkedin: [Christopher Amanor](https://www.linkedin.com/in/christopher-amanor/)
+
+👤 **Phylis Chepchumba**
+
+- Github: [@Phlylis05](https://github.com/phlylis05)
+- Linkedin: [PhylisChepchumba](https://linkedin.com/PhylisChepchumba)
+- Twitter: [chepchumba05](https://twitter.com/chepchumba05)
 
 ## 🤝 Contributing
 
