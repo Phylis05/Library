@@ -20,7 +20,7 @@ function render(myLibrary = []) {
               <div class="float-right">
                 <button class="btn btn-success"
               data-status="${book.status}" data-index="${index}">
-                ${(book.status === 0) ? 'Mark as Read' : 'Mark as Unread'}
+                ${(book.status === false) ? 'Mark as Read' : 'Mark as Unread'}
               </button>
               <button button class="btn btn-danger"
               data-status = "delete"
