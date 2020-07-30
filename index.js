@@ -25,7 +25,7 @@ function render(myLibrary) {
               <p>
                ${book.title}
               <button data-status="${status}" data-index="${index}">
-                ${ (book.status == 0) ? "Read" : "Unread" }
+                ${ (book.status == 0) ? "Mark as Read" : "Mark as Unread" }
               </button>
               <button data-status="delete" data-index="${index}">
                 Delete
@@ -42,17 +42,17 @@ function deleteBookFromLibrary (index) {
 }
 
 function editBookInLibrary(e) {
-  const {index, status} = e.target.dataset;
-  if (status == 'delete'){
+  const { index, status } = e.target.dataset;
+  if (status === 'delete') {
     deleteBookFromLibrary(index);
-    console.log(myLibrary);
   }else{
     changeStatus(index);
   }
 }
 
 function changeStatus(index) {
-
+  myLibrary[index].status = !myLibrary[index].status;
+  render(myLibrary);
 }
 
 addBooks.addEventListener('submit', addBookToLibrary);
