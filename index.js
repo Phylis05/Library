@@ -1,3 +1,5 @@
+import { addBooks, bookList, title, author, pages } from './dom.js';
+
 let myLibrary = [];
 
 function Book(title, author, pages, status) {
@@ -12,8 +14,16 @@ function Book(title, author, pages, status) {
 
 function addBookToLibrary(e) {
   e.preventDefault();
-  console.log(title);
-  const newBook = new Book(title, author, pages);
+  const newBook = new Book(title.value, author.value, pages.value);
   myLibrary.push(newBook);
-  console.log(myLibrary);
+  render(myLibrary);
 }
+
+function render(myLibrary) {
+  bookList.innerHTML = myLibrary.map((book) => {
+    console.log(book.title);
+     return `${book.title}`;
+  }).join('');
+}
+
+addBooks.addEventListener('submit', addBookToLibrary);
