@@ -1,28 +1,15 @@
+/* eslint-disable import/extensions */
 import {
   addBooks, bookList, title, author, pages,
 } from './dom.js';
 
 const myLibrary = JSON.parse(localStorage.getItem('myLibrary')) || [];
 
-render(myLibrary);
-
-function Book(title, author, pages, status) {
+function Book(title, author, pages, status = false) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.status = false;
-  this.info = function () {
-    return `${title} was written by ${author}, ${pages} pages`;
-  };
-}
-
-function addBookToLibrary(e) {
-  e.preventDefault();
-  const newBook = new Book(title.value, author.value, pages.value);
-  myLibrary.push(newBook);
-  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
-  render(myLibrary);
-  this.reset();
+  this.status = status;
 }
 
 function render(myLibrary = []) {
@@ -32,8 +19,8 @@ function render(myLibrary = []) {
                <p>This book was written by ${book.author}, ${book.pages} pages</p>
               <div class="float-right">
                 <button class="btn btn-success"
-              data-status="${status}" data-index="${index}">
-                ${(book.status == 0) ? 'Mark as Read' : 'Mark as Unread'}
+              data-status="${book.status}" data-index="${index}">
+                ${(book.status === 0) ? 'Mark as Read' : 'Mark as Unread'}
               </button>
               <button button class="btn btn-danger"
               data-status = "delete"
@@ -46,8 +33,22 @@ function render(myLibrary = []) {
             </div>`).join('');
 }
 
+function addBookToLibrary(e) {
+  e.preventDefault();
+  const newBook = new Book(title.value, author.value, pages.value);
+  myLibrary.unshift(newBook);
+  localStorage.setItem('myLibrary', JSON.stringify(myLibrary));
+  render(myLibrary);
+  this.reset();
+}
+
 function deleteBookFromLibrary(index) {
   myLibrary.splice(index, 1);
+  render(myLibrary);
+}
+
+function changeStatus(index) {
+  myLibrary[index].status = !myLibrary[index].status;
   render(myLibrary);
 }
 
@@ -60,10 +61,6 @@ function editBookInLibrary(e) {
   }
 }
 
-function changeStatus(index) {
-  myLibrary[index].status = !myLibrary[index].status;
-  render(myLibrary);
-}
-
+render(myLibrary);
 addBooks.addEventListener('submit', addBookToLibrary);
 bookList.addEventListener('click', editBookInLibrary);
